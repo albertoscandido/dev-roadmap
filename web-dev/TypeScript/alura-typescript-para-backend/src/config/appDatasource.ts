@@ -1,13 +1,11 @@
 import { DataSource } from "typeorm";
+import AdotanteEntity from "../entities/AdotanteEntity";
+import EnderecoEntity from "../entities/EnderecoEntity";
 import PetEntity from "../entities/PetEntity";
-
-console.log('Current directory:', __dirname);
-console.log('Entities path:', "src/entities/**/*.ts");
-console.log('PetEntity loaded:', PetEntity);
 
 export const AppDataSource = new DataSource({
   type: "sqlite",
   database: "./src/config/database.sqlite",
-  entities: [PetEntity],
+  entities: [PetEntity, AdotanteEntity, EnderecoEntity],
   synchronize: true
 });
