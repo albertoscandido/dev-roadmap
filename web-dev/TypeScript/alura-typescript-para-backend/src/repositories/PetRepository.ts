@@ -21,7 +21,9 @@ export default class PetRepository implements InterfacePetRepository {
   }
 
   async listaPet(): Promise<PetEntity[]> {
-    return await this.petRepository.find();
+    return await this.petRepository.find({
+      relations: ['adotante']
+    });
   }
 
   async atualizaPet(
@@ -88,5 +90,9 @@ export default class PetRepository implements InterfacePetRepository {
     pet.adotado = true;
     await this.petRepository.save(pet);
     return { success: true };
+  }
+
+  async buscaPetPorCampoGenerico<T extends keyof PetEntity>(campo: T, valor: string): Promise<PetEntity[]> {
+    return await this.petRepository.find({where: {[campo]: valor}});
   }
 }

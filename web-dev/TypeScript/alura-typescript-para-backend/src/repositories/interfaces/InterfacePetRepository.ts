@@ -16,4 +16,6 @@ export interface InterfacePetRepository{
     idPet: number,
     idAdotante: number
   ): Promise<{ success: boolean; message?: string }> | void;
+
+  buscaPetPorCampoGenerico<T extends keyof PetEntity>(campo:T, valor: string): Array<PetEntity> | Promise<PetEntity[]>;
 }
